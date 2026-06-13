@@ -55,24 +55,26 @@ Think of ownership as owning a house.
 House --> Owner
 ```
 
-The owner has complete control over the property.
+The owner has full control over the property. The can live in it, renovate it, sell it, or transfer ownership to someone else.
 
-Now imagine someone wants to visit the house.
+Now suppose someone wants to use the house temporarily.
 
-The owner does not need to transfer ownership of the house.
-
-Instead, they grant temporary access.
+Instead of selling the house, the owner rents it out.
 ```text
 House --> Owner
 
-Visitor --> Temporary Permission
+Visitor --> Renter (Temporary access)
 ```
 
-The visitor can use the house according to the permissions granted, but ownership never changes.
+The renter can use the house, but they do not own it.
 
-Borrowing works the same way.
+The important point is that ownership never changes.
 
-The owner retains ownership of the value while other parts of the program temprarily access it.
+The owner remains responsible for the property, while the renter only receives temporary access.
+
+Borrowing in rust works the same way.
+
+The owner of a value can temporarily lend access to other parts of the program without tranferring ownership.
 
 ----
 
