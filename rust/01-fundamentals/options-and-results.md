@@ -87,3 +87,85 @@ let username: Option<&str> = None;
 The compiler knows both cases are possible.
 
 ---
+
+
+# Result <T, E>
+
+## Why This Exists
+Some operation can fail.
+
+Examples:
+- Reading a file
+- Parsing a number
+- Making a network request
+- Connecting to a database
+
+Many languages use:
+- Exceptions
+- Error codes
+- Special return values
+
+Rust treats failure as ordinary values.
+
+## Error As Values
+In rust:
+
+```rust
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+```
+
+An error is not something magical. It is simply another value.
+
+## Mental Model
+
+Instead of:
+```text
+Do operation
+↓
+Maybe throw exception
+↓
+Program jumps elsewhere
+```
+
+Rust does:
+```text
+Do operation
+↓
+Return success OR failure
+↓
+Caller decides what to do
+```
+Control flow remain explicit.
+
+---
+
+## Syntax
+
+```rust
+let result: Result<i32, String> = Ok(42);
+```
+
+or 
+
+```rust
+let result: Result<i32, String> = Err(String::from("Something failed"));
+```
+
+---
+
+## Example
+
+Parsing a number:
+
+```rust
+let number: i32 = "42".parse()?;
+```
+
+Type:
+
+```rust
+Result<i32, ParseIntError>
+```
