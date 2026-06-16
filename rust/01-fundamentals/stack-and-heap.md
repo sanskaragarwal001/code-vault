@@ -99,3 +99,89 @@ let num = Box::new(10);
 `Box<T>` stores a value on the heap and keeps a pointer on the stack.
 
 ---
+
+## Example 
+
+### Stack Example
+
+```rust
+fn main() {
+  let a = 5;
+  let b = a;
+
+  println!("{}", a);
+  println!("{}", b);
+}
+```
+
+Memory:
+
+```text
+Stack
++-----+
+| a=5 |
++-----+
+| b=5 |
++-----+
+```
+
+The value is copied because integers are small and implements `Copy`.
+
+---
+
+### Heap Example
+
+```rust
+fn main() {
+  let s1 = String::from("hello");
+  let s2 = s1;
+
+  // println!("{}", s1); // Error
+  println!("{}", s2);
+}
+```
+
+Memory before move:
+```text
+Stack                     Heap
++---------+              +---------+
+| s1 ---- | -----------> | "hello" |
++---------+              +---------+
+```
+
+After: 
+```rust
+let s2 = s1;
+```
+
+Ownership moves to `s2`.
+
+```text
+Stack                     Heap
++---------+              +---------+
+| s2 ---- | -----------> | "hello" |
++---------+              +---------+
+```
+
+Rusr invalidates `s1` to prevent double-free bugs.
+
+---
+
+## Performance Considerations
+
+### Stack
+
+✅ Very fast
+✅ Automatically managed
+✅ Cache friendly
+❌ Size must be known at compile time
+❌ Limited memory
+
+### Heap
+
+✅ Flexible size
+✅ Can store large data
+✅ Supports dynamic structures
+❌ Slower allocation
+❌ Requires memory management
+❌ Extra pointer indirection
